@@ -1,4 +1,10 @@
 from fastapi import FastAPI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+POLYGON_API_KEY = os.getenv("FINHUB_API_KEY")
 
 app = FastAPI()
 
