@@ -1,0 +1,16 @@
+watch_trades:
+  - symbol: MSFT
+  - symbol: AAPL
+  - symbol: GOOG
+  - symbol: AMZN
+  - symbol: FB
+  - symbol: TSLA
+  - symbol: NVDA
+  - symbol: PYPL
+  - symbol: NFLX
+  - symbol: ADBE
+  - symbol: CRM
+  - symbol: PFE
+  - symbol: BABA
+  - symbol: INTC
+  - symbol: GSPC

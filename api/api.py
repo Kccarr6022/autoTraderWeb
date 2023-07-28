@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+from market_trader import Market
 from dotenv import load_dotenv
+from fastapi import FastAPI
+import yfinance as yf
 import os
 
 load_dotenv()
@@ -7,8 +9,13 @@ load_dotenv()
 POLYGON_API_KEY = os.getenv("FINHUB_API_KEY")
 
 app = FastAPI()
+market = Market()
 
 
-@app.get("/current_returns")
-def get_current_returns():
-    return {"returns": 0.05} 
+@app.get("/trades")
+def get_trades():
+    return market.get_watched_trades()
+
+@app.post("/trade_history")
+def get_trade_history(trade: str):
+    return []
