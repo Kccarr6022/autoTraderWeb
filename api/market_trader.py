@@ -12,5 +12,5 @@ class Market:
         return self.watched_trades
 
     def __get_watched_trades_from_yaml(self) -> List[str]:
-        with open('trades_to_watch.yml', 'r') as file:
+        with open('trades_to_watch.yaml', 'r') as file:
             return yaml.safe_load(file)
