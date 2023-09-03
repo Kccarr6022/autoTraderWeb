@@ -24,16 +24,14 @@ function App() {
 
   return (
     <section className="w-screen h-screen fixed">
-      <header className="bg-primary text-secondary w-full py-4 ">
+      <header className="bg-primary text-secondary py-4 h-[10vh]">
         <h1 className="text-3xl font-bold underline text-center">
           Auto Trader
         </h1>
       </header>
       <main className="flex">
         <SideBar />
-        <section className="w-[calc(100%-200px)] h-screen bg-secondary">
-          <TradePlotter trade={trade} />
-        </section>
+        <TradePlotter trade={trade} />
       </main>
     </section>
   );

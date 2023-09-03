@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const TradePlotter = ({ trade }) => {
   const [tradeHistory, setTradeHistory] = useState([
@@ -52,7 +53,7 @@ const TradePlotter = ({ trade }) => {
 
   const getTradeHistory = async (trade) => {
     axios
-      .post(process.env.REACT_APP_API_ADDRESS + "/trade_history", {
+      .post(import.meta.env.VITE_API_ADDRESS + "/trade_history", {
         trade: trade,
       })
       .then((res) => {
@@ -64,29 +65,29 @@ const TradePlotter = ({ trade }) => {
   };
 
   useEffect(() => {
-    getTradeHistory(trade);
-  }, [trade]);
+    const intervalCall = setInterval(() => {
+      getTradeHistory(trade);
+    }, 1000);
+    return () => {
+      clearInterval(intervalCall);
+    };
+  }, []);
 
   return (
-    <section className="bg-green-900 h-screen m-1">
+    <section className="relative w-[calc(100vw - 250px)]">
       <ResponsiveContainer
-        width="100%"
-        height="100%"
-        className="bg-gray-700"
-        aspect={1.5}
+        className="bg-gray-700 absolute bottom-5 left-0 right-0 top-0"
+        aspect={1.8}
       >
-        <LineChart
-          margin={{ left: 25, top: 25, right: 25, bottom: 50 }}
-          data={tradeHistory}
-        >
+        <LineChart data={tradeHistory}>
           <CartesianGrid />
           <XAxis dataKey="date" interval={"preserveStartEnd"} />
           <YAxis dataKey="price"></YAxis>
           <Legend />
           <Tooltip />
-          <Line dataKey="price" stroke="white" activeDot={{ r: 5 }} />
-          <Line dataKey="lowBand" stroke="white" activeDot={{ r: 5 }} />
-          <Line dataKey="HighBand" stroke="white" activeDot={{ r: 5 }} />
+          <Line dataKey="price" stroke="blue" activeDot={{ r: 5 }} />
+          <Line dataKey="lowBand" stroke="red" activeDot={{ r: 5 }} />
+          <Line dataKey="highBand" stroke="green" activeDot={{ r: 5 }} />
         </LineChart>
       </ResponsiveContainer>
     </section>
